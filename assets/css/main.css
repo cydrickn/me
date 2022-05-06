@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    @apply scroll-smooth;
+}
+body {
+    @apply text-lg;
+}
+
+.markup p {
+    @apply mb-4;
+}
+
+.markup ul li {
+    @apply relative pl-8 mb-2.5;
+}
+
+.markup ul li:before{
+    content: "▹";
+    @apply absolute left-0 text-primary;
+}
