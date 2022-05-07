@@ -15,6 +15,7 @@ export const useData = () => {
                 },
                 subTitle: '',
                 email: 'hello@cydricknonog.me',
+                repository: 'https://github.com/cydrickn/me'
             },
             stacks: [
                 {
@@ -37,7 +38,15 @@ export const useData = () => {
                     endDate: '2022-02-01',
                     jobStatus: 'FullTime',
                 }
-            ]
+            ],
+            socials: [
+                {
+                    name: 'Github',
+                    icon: 'icons-github',
+                    url: 'https://github.com/cydrickn',
+                    iconAsSvg: false,
+                }
+            ],
         }
     }
 
@@ -53,6 +62,7 @@ export const useData = () => {
                     }
                     subTitle
                     email
+                    repository
                 }
                 stacks(where: {visible: true}, stage: PUBLISHED) {
                     name
@@ -71,6 +81,12 @@ export const useData = () => {
                     startDate
                     endDate
                     jobStatus
+                }
+                socials(stage: PUBLISHED) {
+                    name
+                    icon
+                    url
+                    iconAsSvg
                 }
             }`
         )

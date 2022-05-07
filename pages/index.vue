@@ -46,8 +46,8 @@ const currentSelectedExperience = ref(0);
       <Title>{{ author.name }}</Title>
       <Meta name="description" :content="author.intro" />
     </Head>
-    <div class="max-w-5xl mx-auto w-full">
-      <div class="container mx-auto px-10">
+    <div class="max-w-5xl mx-auto w-full px-5 md:px-24">
+      <div class="container mx-auto">
         <div class="hero min-h-screen">
           <div class="hero-content justify-start w-full p-0">
             <div class="">
@@ -59,7 +59,7 @@ const currentSelectedExperience = ref(0);
           </div>
         </div>
       </div>
-      <div class="container mx-auto px-10 py-24">
+      <div class="container mx-auto py-24">
         <div class="flex gap-4 mt-2.5 mb-10">
           <h2 class="numbered-heading">About Me</h2>
           <div class="divider grow max-w-[300px]"></div>
@@ -73,7 +73,7 @@ const currentSelectedExperience = ref(0);
           <div class="text-center mb-10">
             <h3 class="text-2xl font-medium">Technologies</h3>
           </div>
-          <div class="flex flex-wrap gap-4 justify-center max-w-2xl mx-auto">
+          <div class="flex flex-wrap gap-2 lg:gap-4 justify-center max-w-2xl mx-auto">
             <div v-for="(stack, key) in stacks" :key="key"
                  class="flex items-center justify-center gap-4 technology py-2 px-4 bg-base-200 shadow-md">
               <div v-html="stack.logo.svg" class="h-10 w-10 flex items-center justify-center"></div>
@@ -90,20 +90,20 @@ const currentSelectedExperience = ref(0);
           </div>
         </div>
       </div>
-      <div class="container mx-auto px-10 py-24">
+      <div class="container mx-auto py-24">
         <div class="flex gap-4 mb-10">
           <h2 class="numbered-heading">Where I've Worked?</h2>
           <div class="divider grow max-w-[300px]"></div>
         </div>
-        <div class="flex grap-4">
-          <div>
-            <ul class="menu max-w-[180px] w-[180px]">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <div class="overflow-x-auto sm:overflow-unset mb-5 sm:mb-0 grow">
+            <ul class="menu menu-horizontal sm:menu-vertical max-w-[180px] w-full">
               <li v-for="(experience, key) in experiences" :key="key" :class="{ 'text-primary': currentSelectedExperience === key }" @click="currentSelectedExperience = key">
-                <span class="text-sm">{{ experience.company }}</span>
+                <span class="text-sm">{{ experience.companyTag }}</span>
               </li>
             </ul>
           </div>
-          <div class="ml-5">
+          <div class="sm:ml-5">
             <div v-for="(experience, key) in experiences"
                  :key="key"
                  :class="{ block: key === currentSelectedExperience, hidden: key !== currentSelectedExperience }"
@@ -111,7 +111,7 @@ const currentSelectedExperience = ref(0);
             >
               <h3 class="text-base mb-2 font-medium">
                 <span><template v-if="experience.jobStatus !== 'FullTime'">{{ jobStatuses[experience.jobStatus] }}&nbsp;</template>{{ experience.role }}</span>
-                <span class="text-primary">&nbsp;@&nbsp;<a :href="experience.website" target="_blank">{{ experience.companyTag }}</a></span>
+                <span class="text-primary">&nbsp;@&nbsp;<a :href="experience.website" target="_blank">{{ experience.company }}</a></span>
               </h3>
               <p class="text-sm mb-6">
                 {{ experience.startMonth }} <template v-if="experience.startYear !== experience.endYear">{{ experience.startYear }}</template>
@@ -122,13 +122,13 @@ const currentSelectedExperience = ref(0);
           </div>
         </div>
       </div>
-      <div class="container mx-auto px-10 py-24">
+      <div class="container mx-auto py-24">
         <div class="flex gap-4 mb-10">
           <h2 class="numbered-heading">What did I built?</h2>
           <div class="divider grow max-w-[300px]"></div>
         </div>
       </div>
-      <div class="container mx-auto px-10 py-24 text-center max-w-xl">
+      <div class="container mx-auto py-24 text-center max-w-xl">
         <p class="numbered-heading-sm py-6">What's Next?</p>
         <h2 class="text-5xl font-bold mb-10">Get in Touch</h2>
         <p>

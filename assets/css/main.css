@@ -21,3 +21,12 @@ body {
     content: "▹";
     @apply absolute left-0 text-primary;
 }
+
+@layer utilities {
+    .overflow-unset {
+        overflow: unset;
+    }
+    .writing-vertical-rl {
+        writing-mode: vertical-rl;
+    }
+}

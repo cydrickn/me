@@ -7,6 +7,10 @@ export default defineNuxtConfig({
         graphCmsUrl: '',
         useGraphCms: 0,
     },
+    components: {
+        global: true,
+        dirs: ['~/components', '~/components/icons']
+    },
     css: ['~/assets/css/main.css'],
     build: {
         postcss: {
