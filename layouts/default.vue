@@ -6,7 +6,7 @@ const socialMedias = ref(data.value.socials);
 
 <template>
   <div data-theme="night" class="min-h-screen flex flex-col">
-    <div class="fixed w-full bg-base-100 z-10">
+    <div class="fixed w-full bg-base-100 z-20">
       <div class="navbar h-[6.25rem] px-5 sm:px-10">
         <div class="navbar-start w-auto">
           <div class="w-[2.626rem]">
@@ -43,7 +43,7 @@ const socialMedias = ref(data.value.socials);
         <li class="divider divider-horizontal h-20 hidden md:flex mt-5 w-full mx-auto"></li>
       </ul>
       <ul class="hidden md:flex flex-col fixed bottom-0 md:right-5 w-9 gap-4">
-        <li class="p-2"><a :href="`mailto:${data.author.email}`" class="block m-auto writing-vertical-rl">{{ data.author.email }}</a></li>
+        <li class="p-2"><a :href="`mailto:${data.author.email}`" class="block m-auto writing-vertical-rl hover:text-primary">{{ data.author.email }}</a></li>
         <li class="divider divider-horizontal h-20 flex mt-5  w-full mx-auto"></li>
       </ul>
       <a class="block p-2 hover:text-primary" :href="data.author.repository" target="_blank">

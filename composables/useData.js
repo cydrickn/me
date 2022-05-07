@@ -47,6 +47,12 @@ export const useData = () => {
                     iconAsSvg: false,
                 }
             ],
+            projects: [{
+                name: 'Personal Website V2',
+                description: 'The second version of my personal website',
+                link: 'https://cydricknonog.me',
+                sourceCode: 'https://github.com/cydrickn/me'
+            }]
         }
     }
 
@@ -87,6 +93,12 @@ export const useData = () => {
                     icon
                     url
                     iconAsSvg
+                }
+                projects(stage: PUBLISHED) {
+                    name
+                    description
+                    link
+                    sourceCode
                 }
             }`
         )

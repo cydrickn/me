@@ -13,8 +13,8 @@ const jobStatuses = {
 };
 
 const author = ref(data.value.author);
-const mostUseStacks = ref(data.value.mostUseStacks);
 const stacks = ref(data.value.stacks);
+const projects = ref(data.value.projects);
 const experiences = computed(() => {
   return data.value.experiences.map((experience) => {
     const exp = experience;
@@ -46,7 +46,7 @@ const currentSelectedExperience = ref(0);
       <Title>{{ author.name }}</Title>
       <Meta name="description" :content="author.intro" />
     </Head>
-    <div class="max-w-5xl mx-auto w-full px-5 md:px-24">
+    <div class="max-w-5xl mx-auto w-full px-5 md:px-24 xl:px-5">
       <div class="container mx-auto">
         <div class="hero min-h-screen">
           <div class="hero-content justify-start w-full p-0">
@@ -96,14 +96,14 @@ const currentSelectedExperience = ref(0);
           <div class="divider grow max-w-[300px]"></div>
         </div>
         <div class="flex flex-col sm:flex-row gap-4">
-          <div class="overflow-x-auto sm:overflow-unset mb-5 sm:mb-0 grow">
+          <div class="overflow-x-auto sm:overflow-unset mb-5 sm:mb-0">
             <ul class="menu menu-horizontal sm:menu-vertical max-w-[180px] w-full">
               <li v-for="(experience, key) in experiences" :key="key" :class="{ 'text-primary': currentSelectedExperience === key }" @click="currentSelectedExperience = key">
                 <span class="text-sm">{{ experience.companyTag }}</span>
               </li>
             </ul>
           </div>
-          <div class="sm:ml-5">
+          <div class="sm:ml-5 grow">
             <div v-for="(experience, key) in experiences"
                  :key="key"
                  :class="{ block: key === currentSelectedExperience, hidden: key !== currentSelectedExperience }"
@@ -126,6 +126,26 @@ const currentSelectedExperience = ref(0);
         <div class="flex gap-4 mb-10">
           <h2 class="numbered-heading">What did I built?</h2>
           <div class="divider grow max-w-[300px]"></div>
+        </div>
+        <div>
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+            <li v-for="(project, key) in projects" :key="key">
+              <div class="flex flex-col py-8 px-7 project hover:cursor-pointer relative bg-primary-content shadow-lg rounded h-full">
+                <header class="flex justify-between items-center mb-9">
+                  <div class="w-10 h-10"><icons-folder class="text-primary w-full"></icons-folder></div>
+                  <div class="flex">
+                    <a v-if="project.sourceCode" :href="project.sourceCode" class="relative z-10 block p-1 hover:text-primary"><icons-github class="w-5 h-5"></icons-github></a>
+                    <a v-if="project.link" :href="project.link" class="relative z-10 block p-1 hover:text-primary"><icons-link class="w-5 h-5"></icons-link></a>
+                  </div>
+                </header>
+                <div>
+                  <h3 class="project-title text-xl font-semibold mb-2.5"><a :href="project.link ?? project.sourceCode" target="_blank" rel="noopener noreferrer" class="project-link">{{ project.name }}</a></h3>
+                  <p v-html="project.description"></p>
+                </div>
+                <footer></footer>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="container mx-auto py-24 text-center max-w-xl">
@@ -165,5 +185,14 @@ body {
   counter-increment: heading-counter 1;
   content: "0" counter(heading-counter) ": ";
   @apply mr-1 text-sm text-primary font-normal;
+}
+
+.project:hover h3 {
+  @apply text-primary;
+}
+
+.project-link:before {
+  content: '';
+  @apply absolute w-full h-full top-0 left-0;
 }
 </style>
