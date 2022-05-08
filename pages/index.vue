@@ -134,8 +134,8 @@ const currentSelectedExperience = ref(0);
                 <header class="flex justify-between items-center mb-9">
                   <div class="w-10 h-10"><icons-folder class="text-primary w-full"></icons-folder></div>
                   <div class="flex">
-                    <a v-if="project.sourceCode" :href="project.sourceCode" class="relative z-10 block p-1 hover:text-primary"><icons-github class="w-5 h-5"></icons-github></a>
-                    <a v-if="project.link" :href="project.link" class="relative z-10 block p-1 hover:text-primary"><icons-link class="w-5 h-5"></icons-link></a>
+                    <a v-if="project.sourceCode" :href="project.sourceCode" class="relative z-10 block p-1 hover:text-primary" target="_blank"><icons-github class="w-5 h-5"></icons-github></a>
+                    <a v-if="project.link" :href="project.link" class="relative z-10 block p-1 hover:text-primary" target="_blank"><icons-link class="w-5 h-5"></icons-link></a>
                   </div>
                 </header>
                 <div>
