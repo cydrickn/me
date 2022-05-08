@@ -11,10 +11,32 @@ const jobStatuses = {
   FullTime: 'Full-Time',
   PartTime: 'Part-Time'
 };
+const levels =  ['Expert', 'Advance', 'Intermediate', 'Beginner', null];
+
+const currentSelectedExperience = ref(0);
+const currentStackCategory = ref('All');
 
 const author = ref(data.value.author);
-const stacks = ref(data.value.stacks);
 const projects = ref(data.value.projects);
+const stacks = computed(() => {
+  const newStacks = data.value.stacks.map((stack) => {
+    const newStack = { ...stack };
+    newStack.categories = newStack.stackCategories.map((category) => {
+      return category.name;
+    });
+
+    newStack.visible = currentStackCategory.value === 'All' || newStack.categories.includes(currentStackCategory.value);
+
+    return newStack;
+  });
+
+  newStacks.sort((next, current) => {
+    return levels.indexOf(next.level) - levels.indexOf(current.level);
+  });
+
+  return newStacks;
+});
+
 const experiences = computed(() => {
   return data.value.experiences.map((experience) => {
     const exp = experience;
@@ -37,7 +59,15 @@ const experiences = computed(() => {
   });
 });
 
-const currentSelectedExperience = ref(0);
+const categories = computed(() => {
+  let stackCategories = [];
+  stacks.value.forEach((stack) => {
+    stackCategories = stackCategories.concat(stack.categories);
+  });
+
+  return ['All', ...new Set(stackCategories)];
+});
+
 </script>
 
 <template>
@@ -73,15 +103,23 @@ const currentSelectedExperience = ref(0);
           <div class="text-center mb-10">
             <h3 class="text-2xl font-medium">Technologies</h3>
           </div>
-          <div class="flex flex-wrap gap-2 lg:gap-4 justify-center max-w-2xl mx-auto">
-            <div v-for="(stack, key) in stacks" :key="key"
-                 class="flex items-center justify-center gap-4 technology py-2 px-4 bg-base-200 shadow-md">
-              <div v-html="stack.logo.svg" class="h-10 w-10 flex items-center justify-center"></div>
-              <div>
-                <p class="text-base font-medium text-base-content whitespace-nowrap">{{ stack.name }}</p>
-                <p class="text-sm text-primary">{{ stack.level }}</p>
+          <div class="mb-10">
+            <ul class="menu menu-horizontal w-full flex-wrap justify-center">
+              <li v-for="(category, key) in categories" :key="key" class="whitespace-nowrap" :class="{'text-primary': currentStackCategory === category}" @click="currentStackCategory = category">
+                <span class="text-sm">{{ category }}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="flex flex-wrap gap-2 lg:gap-4 justify-center mx-auto">
+            <template v-for="(stack, key) in stacks" :key="key">
+              <div v-if="stack.visible" class="stack flex items-center justify-center gap-4 technology py-2 px-4 bg-base-200 shadow-md">
+                <div v-html="stack.logo.svg" class="h-10 w-10 flex items-center justify-center"></div>
+                <div>
+                  <p class="text-base font-medium text-base-content whitespace-nowrap">{{ stack.name }}</p>
+                  <p class="text-sm text-primary">{{ stack.level }}</p>
+                </div>
               </div>
-            </div>
+            </template>
           </div>
         </div>
         <div v-if="false" class="mt-24">
