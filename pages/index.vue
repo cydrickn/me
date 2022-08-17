@@ -199,7 +199,6 @@ const categories = computed(() => {
                      class="post object-cover"
                      :class="{ 'max-w-none max-h-full h-full w-full': maximizeHeight }"
                 />
-                <img v-else src="/images/news-banner.jpg" :alt="post.title" class="object-center object-cover max-w-none max-h-full"/>
               </figure>
             </template>
             <template v-slot="{ item }">
