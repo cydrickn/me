@@ -196,7 +196,7 @@ const categories = computed(() => {
                 <img v-if="props.item.coverImage"
                      :src="props.item.coverImage.url"
                      :alt="props.item.title"
-                     class="post object-cover"
+                     class="post object-cover aspect-video"
                      :class="{ 'max-w-none max-h-full h-full w-full': maximizeHeight }"
                 />
               </figure>

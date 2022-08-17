@@ -37,7 +37,7 @@ const formatDate = (dateString) => {
         <img v-if="data.post.coverImage"
              :src="data.post.coverImage.url"
              :alt="data.post.title"
-             class="object-center object-cover w-full"
+             class="object-center object-cover w-full aspect-video"
              :class="{ 'max-w-none max-h-full': data.post.coverImage.width > data.post.coverImage.height }"
         />
       </div>
