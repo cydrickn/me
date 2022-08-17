@@ -10,7 +10,9 @@ const socialMedias = reactive(data.value.socials);
       <div class="navbar h-[6.25rem] px-5 sm:px-10 shadow-md">
         <div class="navbar-start w-auto">
           <div class="w-[2.626rem]">
-            <logo title="Cydrick Nonog" desc="Cydrick Nonog Brand" cColor="fill-primary" nColor="fill-current"></logo>
+            <a href="/">
+              <logo title="Cydrick Nonog" desc="Cydrick Nonog Brand" cColor="fill-primary" nColor="fill-current"></logo>
+            </a>
           </div>
         </div>
         <div class="navbar-end grow w-auto">
