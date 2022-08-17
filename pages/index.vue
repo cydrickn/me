@@ -91,6 +91,7 @@ const categories = computed(() => {
       </div>
       <div class="container mx-auto py-24">
         <div class="flex gap-4 mt-2.5 mb-10">
+          <a id="about"></a>
           <h2 class="numbered-heading">About Me</h2>
           <div class="divider grow max-w-[300px]"></div>
         </div>
@@ -130,6 +131,7 @@ const categories = computed(() => {
       </div>
       <div class="container mx-auto py-24">
         <div class="flex gap-4 mb-10">
+          <a id="experience"></a>
           <h2 class="numbered-heading">Where I've Worked?</h2>
           <div class="divider grow max-w-[300px]"></div>
         </div>
@@ -162,6 +164,7 @@ const categories = computed(() => {
       </div>
       <div class="container mx-auto py-24">
         <div class="flex gap-4 mb-10">
+          <a id="works"></a>
           <h2 class="numbered-heading">What did I built?</h2>
           <div class="divider grow max-w-[300px]"></div>
         </div>
@@ -187,6 +190,7 @@ const categories = computed(() => {
         </div>
       </div>
       <div class="container mx-auto py-24 text-center max-w-xl">
+        <a id="contact"></a>
         <p class="numbered-heading-sm py-6">What's Next?</p>
         <h2 class="text-5xl font-bold mb-10">Get in Touch</h2>
         <p>

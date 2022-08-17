@@ -6,7 +6,7 @@ const socialMedias = ref(data.value.socials);
 
 <template>
   <div data-theme="night" class="min-h-screen flex flex-col">
-    <div class="fixed w-full bg-base-100 z-20">
+    <div id="mainNav" class="fixed w-full bg-base-100 z-20">
       <div class="navbar h-[6.25rem] px-5 sm:px-10">
         <div class="navbar-start w-auto">
           <div class="w-[2.626rem]">
@@ -15,17 +15,25 @@ const socialMedias = ref(data.value.socials);
         </div>
         <div class="navbar-end grow w-auto">
           <ul class="hidden sm:flex menu menu-horizontal gap-4">
-            <li><a class="p-0 hover:text-primary hover:bg-transparent">
-              <span class="text-primary">01:</span> About</a>
+            <li>
+              <nuxt-link to="#about" class="p-0 hover:text-primary hover:bg-transparent">
+                <span class="text-primary">01:</span> About
+              </nuxt-link>
             </li>
-            <li><a class="p-0 hover:text-primary hover:bg-transparent">
-              <span class="text-primary">02:</span> Experience</a>
+            <li>
+              <nuxt-link to="#experience" class="p-0 hover:text-primary hover:bg-transparent">
+                <span class="text-primary">02:</span> Experience
+              </nuxt-link>
             </li>
-            <li><a class="p-0 hover:text-primary hover:bg-transparent">
-              <span class="text-primary">03:</span> Work</a>
+            <li>
+              <nuxt-link to="#works" class="p-0 hover:text-primary hover:bg-transparent">
+                <span class="text-primary">03:</span> Work
+              </nuxt-link>
             </li>
-            <li><a class="p-0 hover:text-primary hover:bg-transparent">
-              <span class="text-primary">04:</span> Contact</a>
+            <li>
+              <nuxt-link to="#contact" class="p-0 hover:text-primary hover:bg-transparent">
+                <span class="text-primary">04:</span> Contact
+              </nuxt-link>
             </li>
           </ul>
         </div>
