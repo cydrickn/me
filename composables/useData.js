@@ -60,6 +60,37 @@ export const useData = () => {
         }
     }
 
+    const getPost = async (slug) => {
+        return await $graphcms().request(
+            gql`{
+                post(where: {slug: "${slug}"}, stage: PUBLISHED) {
+                    author {
+                        name
+                        picture {
+                            fileName
+                            url
+                        }
+                    }
+                    content {
+                        html
+                    }
+                    title
+                    tags
+                    slug
+                    coverImage {
+                        fileName
+                        url
+                        width
+                        height
+                    }
+                    date
+                    excerpt
+                }
+            }`
+        );
+    }
+
+
     const getDataGraphCms = () => {
         return $graphcms().request(
             gql`{
@@ -108,6 +139,27 @@ export const useData = () => {
                     link
                     sourceCode
                 }
+                posts(stage: PUBLISHED) {
+                    title
+                    slug
+                    tags
+                    date
+                    excerpt
+                    coverImage {
+                        fileName
+                        url
+                        width
+                        height
+                    }
+                    author {
+                        name
+                        picture {
+                            fileName
+                            url
+                        }
+                    }
+
+                }
             }`
         )
     }
@@ -121,6 +173,7 @@ export const useData = () => {
     }
 
     return {
-        getData
+        getData,
+        getPost
     }
 }

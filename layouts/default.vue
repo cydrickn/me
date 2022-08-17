@@ -1,13 +1,13 @@
 <script setup>
 import {useData} from "../composables/useData";
 const { data } = await useAsyncData('cms-data', () => useData().getData());
-const socialMedias = ref(data.value.socials);
+const socialMedias = reactive(data.value.socials);
 </script>
 
 <template>
   <div data-theme="night" class="min-h-screen flex flex-col">
     <div id="mainNav" class="fixed w-full bg-base-100 z-20">
-      <div class="navbar h-[6.25rem] px-5 sm:px-10">
+      <div class="navbar h-[6.25rem] px-5 sm:px-10 shadow-md">
         <div class="navbar-start w-auto">
           <div class="w-[2.626rem]">
             <logo title="Cydrick Nonog" desc="Cydrick Nonog Brand" cColor="fill-primary" nColor="fill-current"></logo>
@@ -16,23 +16,28 @@ const socialMedias = ref(data.value.socials);
         <div class="navbar-end grow w-auto">
           <ul class="hidden sm:flex menu menu-horizontal gap-4">
             <li>
-              <nuxt-link to="#about" class="p-0 hover:text-primary hover:bg-transparent">
+              <nuxt-link to="/#about" class="p-0 hover:text-primary hover:bg-transparent">
                 <span class="text-primary">01:</span> About
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="#experience" class="p-0 hover:text-primary hover:bg-transparent">
+              <nuxt-link to="/#experience" class="p-0 hover:text-primary hover:bg-transparent">
                 <span class="text-primary">02:</span> Experience
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="#works" class="p-0 hover:text-primary hover:bg-transparent">
+              <nuxt-link to="/#works" class="p-0 hover:text-primary hover:bg-transparent">
                 <span class="text-primary">03:</span> Work
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="#contact" class="p-0 hover:text-primary hover:bg-transparent">
-                <span class="text-primary">04:</span> Contact
+              <nuxt-link to="/#contents" class="p-0 hover:text-primary hover:bg-transparent">
+                <span class="text-primary">04:</span> Contents
+              </nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/#contact" class="p-0 hover:text-primary hover:bg-transparent">
+                <span class="text-primary">05:</span> Contact
               </nuxt-link>
             </li>
           </ul>

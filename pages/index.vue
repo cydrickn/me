@@ -1,8 +1,8 @@
 <script setup>
-import { gql } from 'graphql-request';
 import { useData } from "../composables/useData";
 import showdown from 'showdown';
 import dayjs from 'dayjs';
+import BlockList from "../components/block-list/BlockList";
 
 const { data } = await useAsyncData('cms-data', () => useData().getData());
 const converter = new showdown.Converter();
@@ -18,6 +18,18 @@ const currentStackCategory = ref('All');
 
 const author = ref(data.value.author);
 const projects = ref(data.value.projects);
+const posts = computed(() => {
+  const newPosts = data.value.posts.map(post => {
+    const newPost = { ...post };
+    newPost.link = '/contents/' + post.slug;
+    newPost.description = post.excerpt;
+
+    return newPost;
+  });
+
+  return newPosts;
+});
+
 const stacks = computed(() => {
   const newStacks = data.value.stacks.map((stack) => {
     const newStack = { ...stack };
@@ -71,12 +83,12 @@ const categories = computed(() => {
 </script>
 
 <template>
-  <NuxtLayout>
-    <Head>
-      <Title>{{ author.name }}</Title>
-      <Meta name="description" :content="author.intro" />
-    </Head>
     <div class="max-w-5xl mx-auto w-full px-5 md:px-24 xl:px-5">
+      <Head>
+        <Title>{{ author.name }}</Title>
+        <Meta name="description" :content="author.intro" />
+      </Head>
+      <a id="about"></a>
       <div class="container mx-auto">
         <div class="hero min-h-screen">
           <div class="hero-content justify-start w-full p-0">
@@ -91,7 +103,6 @@ const categories = computed(() => {
       </div>
       <div class="container mx-auto py-24">
         <div class="flex gap-4 mt-2.5 mb-10">
-          <a id="about"></a>
           <h2 class="numbered-heading">About Me</h2>
           <div class="divider grow max-w-[300px]"></div>
         </div>
@@ -169,24 +180,37 @@ const categories = computed(() => {
           <div class="divider grow max-w-[300px]"></div>
         </div>
         <div>
-          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
-            <li v-for="(project, key) in projects" :key="key">
-              <div class="flex flex-col py-8 px-7 project hover:cursor-pointer relative bg-primary-content shadow-lg rounded h-full">
-                <header class="flex justify-between items-center mb-9">
-                  <div class="w-10 h-10"><icons-folder class="text-primary w-full"></icons-folder></div>
-                  <div class="flex">
-                    <a v-if="project.sourceCode" :href="project.sourceCode" class="relative z-10 block p-1 hover:text-primary" target="_blank"><icons-github class="w-5 h-5"></icons-github></a>
-                    <a v-if="project.link" :href="project.link" class="relative z-10 block p-1 hover:text-primary" target="_blank"><icons-link class="w-5 h-5"></icons-link></a>
-                  </div>
-                </header>
-                <div>
-                  <h3 class="project-title text-xl font-semibold mb-2.5"><a :href="project.link ?? project.sourceCode" target="_blank" rel="noopener noreferrer" class="project-link">{{ project.name }}</a></h3>
-                  <p v-html="project.description"></p>
-                </div>
-                <footer></footer>
-              </div>
-            </li>
-          </ul>
+          <block-list :items="projects" item-class="flex flex-col py-8 px-7 hover:cursor-pointer relative bg-primary-content shadow-lg rounded h-full"></block-list>
+        </div>
+      </div>
+      <div class="container mx-auto py-24">
+        <div class="flex gap-4 mb-10">
+          <a id="contents"></a>
+          <h2 class="numbered-heading">My Contents</h2>
+          <div class="divider grow max-w-[300px]"></div>
+        </div>
+        <div>
+          <block-list :items="posts" item-class="flex flex-col pb-8 pt-2 hover:cursor-pointer relative bg-primary-content shadow-lg rounded h-full">
+            <template v-slot:header="props">
+              <figure class="aspect-video overflow-hidden">
+                <img v-if="props.item.coverImage"
+                     :src="props.item.coverImage.url"
+                     :alt="props.item.title"
+                     class="post object-cover"
+                     :class="{ 'max-w-none max-h-full h-full w-full': maximizeHeight }"
+                />
+                <img v-else src="/images/news-banner.jpg" :alt="post.title" class="object-center object-cover max-w-none max-h-full"/>
+              </figure>
+            </template>
+            <template v-slot="{ item }">
+              <h3 class="project-title text-xl font-semibold mb-2.5 px-7">
+                <a :href="item.link" rel="noopener noreferrer" class="item-link">
+                  {{ item.title }}
+                </a>
+              </h3>
+              <p v-html="item.description" class="px-7"></p>
+            </template>
+          </block-list>
         </div>
       </div>
       <div class="container mx-auto py-24 text-center max-w-xl">
@@ -202,7 +226,6 @@ const categories = computed(() => {
         </div>
       </div>
     </div>
-  </NuxtLayout>
 </template>
 
 <style>
@@ -228,12 +251,11 @@ body {
   content: "0" counter(heading-counter) ": ";
   @apply mr-1 text-sm text-primary font-normal;
 }
-
-.project:hover h3 {
+.item:hover h3 {
   @apply text-primary;
 }
 
-.project-link:before {
+.item-link:before {
   content: '';
   @apply absolute w-full h-full top-0 left-0;
 }
