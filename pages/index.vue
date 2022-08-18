@@ -202,7 +202,7 @@ const categories = computed(() => {
               </figure>
             </template>
             <template v-slot="{ item }">
-              <h3 class="project-title text-xl font-semibold mb-2.5 px-7">
+              <h3 class="project-title text-xl font-semibold mt-8 mb-2.5 px-7">
                 <a :href="item.link" rel="noopener noreferrer" class="item-link">
                   {{ item.title }}
                 </a>
